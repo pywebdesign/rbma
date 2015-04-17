@@ -14,7 +14,7 @@ class SimpleMa
     @count +=1
     @lasts << current
 
-    if lasts.is_a? Array && count
+    if lasts.is_a?(Array) && count
       @lasts = lasts
       @count = count
       @empty = @empty ? @empty : empty
@@ -23,8 +23,10 @@ class SimpleMa
     if @lasts.size > @n
       @lasts.last(5)
     end
+    sum = 0
+    @lasts.each{ |a| sum +=a }
 
-    ma = (@lasts.each{ |a| sum+=a })/@lasts.size
+    ma = (sum).to_f / @lasts.size
 
     if @lasts.size == @n
       ma
