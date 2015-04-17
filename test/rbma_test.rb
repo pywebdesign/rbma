@@ -1,6 +1,70 @@
 require 'test_helper'
 
 class RbmaTest < ActiveSupport::TestCase
+  test "Ema recursive" do
+    e = Ema.new(a: 0.3)
+    e.compute(current: 11)
+    e.compute(current: 13)
+    e.compute(current: 15)
+    e.compute(current: 9)
+    e.compute(current: 8)
+    e.compute(current: 8)
+    e.compute(current: 7)
+    e.compute(current: 9)
+    assert (e.compute(current: 10)*1000).round == 9257
+  end
+  test "Ema non recursive" do
+    e = Ema.new(a: 0.3)
+    e.compute(current: 11)
+    e.compute(current: 13)
+    e.compute(current: 15)
+    e.compute(current: 9)
+    e.compute(current: 8)
+    e.compute(current: 8)
+    e.compute(current: 7)
+    d = e.compute(current: 9)
+    e = Ema.new(a: 0.3)
+    assert (e.compute(current: 10, previous: d)*1000).round == 9257
+  end
+  test "Cma recursive" do
+    c = Cma.new()
+    c.compute(current: 1)
+    c.compute(current: 2)
+    c.compute(current: 21)
+    c.compute(current: 10)
+    c.compute(current: 31)
+    c.compute(current: 28)
+    c.compute(current: 5)
+    assert c.compute(current: 2) == 12.5
+  end
+
+  test "NDayEma" do
+    days = 6
+    n = NDayEma.new(n: days)
+    assert n.a == 2.0/(days+1)
+  end
+
+  test "SimpleMa" do
+    s = SimpleMa.new(n: 5, empty: "-")
+    assert s.compute(current: 2) == "-"
+    s.compute(current: 3)
+    s.compute(current: 5)
+    s.compute(current: 3)
+    assert s.compute(current: 3) == 3.2
+  end
+
+  test "Cma non recursive" do
+    c = Cma.new()
+    c.compute(current: 1)
+    c.compute(current: 2)
+    c.compute(current: 21)
+    c.compute(current: 10)
+    c.compute(current: 31)
+    c.compute(current: 28)
+    d = c.compute(current: 5)
+    c = Cma.new()
+    assert c.compute(current: 2, last: d, count: 7) == 12.5
+  end
   test "IEma recursive" do
     i = IEma.new(g: 60)
     i.compute(t: 0, current: 17)

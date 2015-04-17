@@ -5,7 +5,6 @@ class Ema
   attr_reader :last
 
   def initialize(a:)
-    puts a
     @a = a
   end
 

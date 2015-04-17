@@ -5,12 +5,11 @@ class Cma
 
   def compute(current:, last: nil, count: nil)
     if last && count
-      @last = (last + current).to_f / count
+      @last = (last*count + current).to_f
+      @current = @last/ (count + 1)
     elsif last == nil && count == nil
       @count = @count ? @count + 1 : 1
       @last  = @last  ? @last : 0
-      puts @last
-      puts @count
       @last = (@last + current)
       @current = @last.to_f/@count
     end
