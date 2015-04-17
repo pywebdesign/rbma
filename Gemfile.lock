@@ -2,7 +2,6 @@ PATH
   remote: .
   specs:
     rbma (0.0.1)
-      rails (~> 4.2.0)
 
 GEM
   remote: https://rubygems.org/
@@ -112,5 +111,6 @@ PLATFORMS
 
 DEPENDENCIES
   pry-rails
+  rails (~> 4.2.0)
   rbma!
   sqlite3
