@@ -7,19 +7,14 @@ class SimpleMa
     @n = n
     @empty = empty
     @lasts = []
-    @count = 0
   end
 
-  def compute(current:, count: nil, lasts: nil, empty: nil)
-    @count +=1
-    @lasts << current
-
-    if lasts.is_a?(Array) && count
+  def compute(current:, lasts: nil, empty: nil)
+    if lasts.is_a?(Array)
       @lasts = lasts
-      @count = count
       @empty = @empty ? @empty : empty
     end
-
+    @lasts << current
     if @lasts.size > @n
       @lasts.last(5)
     end
