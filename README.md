@@ -3,7 +3,7 @@
 # List of included function
 * SimpleMA(n:) - Moving Average over the last n day/data.
 * EMA(a:) - Exponential Moving Average with "a" as the alpha parameter.
-* IEMA(a: or g:) - Exponential Moving Average over an irregular timed events serie with "a" as the alpha parameter.
+* IEMA(g:) - Exponential Moving Average over an irregular timed events serie with "a" as the alpha parameter.
 * NDayEMA(n:) -	Exponential Moving Average over n day/data as defined in wikipedia. Equivalent to using EMA(a) with a = 2/(n+1).
 * CMA - Cumulative Moving Average.
 
